@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db
+          image: mongo:4.0-xenial
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: notes-volume
+              mountPath: /data/db
+      volumes:
+        - name: notes-volume
+          emptyDir: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: db
+  ports:
+    - name: mongodb
+      port: 27017

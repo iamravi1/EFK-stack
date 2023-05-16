@@ -1,0 +1,17 @@
+elasticsearch:
+  enabled: true
+  master:
+    enabled: true
+  data:
+    enabled: true
+  ingest:
+    enabled: true
+
+fluent-bit:
+  enabled: true
+  backend: es
+  elasticsearch:
+    host: <ELASTICSEARCH_HOST> # Replace with your Elasticsearch host
+
+kibana:
+  enabled: true
